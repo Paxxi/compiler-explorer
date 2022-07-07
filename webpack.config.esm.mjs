@@ -31,10 +31,12 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import MonacoEditorWebpackPlugin from 'monaco-editor-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-// import {DefinePlugin, HotModuleReplacementPlugin, ProvidePlugin} from 'webpack';
+// eslint-disable-next-line import/no-named-as-default
 import webpack from 'webpack';
-const { DefinePlugin, HotModuleReplacementPlugin, ProvidePlugin } = webpack;
-import {WebpackManifestPlugin} from 'webpack-manifest-plugin';
+import webpack_manifest_plugin from 'webpack-manifest-plugin';
+
+const {DefinePlugin, HotModuleReplacementPlugin, ProvidePlugin} = webpack;
+const {WebpackManifestPlugin} = webpack_manifest_plugin;
 
 const __dirname = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
 const isDev = process.env.NODE_ENV !== 'production';

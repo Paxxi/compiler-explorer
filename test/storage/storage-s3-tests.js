@@ -24,9 +24,9 @@
 
 import AWS from 'aws-sdk-mock';
 
-import * as properties from '../../lib/properties';
-import {StorageS3} from '../../lib/storage';
-import {should} from '../utils';
+import * as properties from '../../lib/properties.js';
+import {StorageS3} from '../../lib/storage/index.js';
+import {should} from '../utils.js';
 
 // NB!!! Anything using mocked AWS calls needs to be initialised in the `it(...)` block! If you initialise it in the
 // `describe()` top level code then it won't be mocked in time. We only mock and de-mock before/after else we end up

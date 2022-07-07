@@ -23,10 +23,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {UnprocessedExecResult} from '../../types/execution/execution.interfaces.js';
-import * as exec from '../exec.js';
 
-import {BaseFormatter} from './base.js';
 import {FormatOptions} from './base.interfaces.js';
+import {BaseFormatter} from './base.js';
 
 export class DartFormatFormatter extends BaseFormatter {
     static get key() {
@@ -34,7 +33,7 @@ export class DartFormatFormatter extends BaseFormatter {
     }
 
     override async format(source: string, options: FormatOptions): Promise<UnprocessedExecResult> {
-        return await exec.execute(this.formatterInfo.exe, ['format'], {input: source});
+        return await this.executor.execute(this.formatterInfo.exe, ['format'], {input: source});
     }
 
     override isValidStyle(style: string): boolean {

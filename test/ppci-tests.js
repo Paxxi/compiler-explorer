@@ -22,9 +22,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {PPCICompiler} from '../lib/compilers/ppci';
+import {PPCICompiler} from '../lib/compilers/ppci.js';
 
-import {makeCompilationEnvironment} from './utils';
+import {makeCompilationEnvironment} from './utils.js';
 
 const languages = {
     c: {id: 'c'},

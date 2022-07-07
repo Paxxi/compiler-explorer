@@ -27,9 +27,9 @@ import {fileURLToPath} from 'url';
 
 import chai from 'chai';
 
-import {CompilationEnvironment} from '../lib/compilation-env';
-import {CompilationQueue} from '../lib/compilation-queue';
-import {CompilerProps, fakeProps} from '../lib/properties';
+import {CompilationEnvironment} from '../lib/compilation-env.js';
+import {CompilationQueue} from '../lib/compilation-queue.js';
+import {CompilerProps, fakeProps} from '../lib/properties.js';
 
 export function makeCompilationEnvironment(options) {
     const compilerProps = new CompilerProps(options.languages, fakeProps(options.props || {}));

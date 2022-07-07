@@ -292,7 +292,7 @@ async function setupWebPackDevMiddleware(router) {
 
     /* eslint-disable node/no-unpublished-import,import/extensions, */
     const {default: webpackDevMiddleware} = await import('webpack-dev-middleware');
-    const {default: webpackConfig} = await import('./webpack.config.esm.js');
+    const {default: webpackConfig} = await import('./webpack.config.esm.mjs');
     const {default: webpack} = await import('webpack');
     /* eslint-enable */
 

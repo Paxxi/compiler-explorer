@@ -1,5 +1,5 @@
 recursive: true
 require:
-  - esm
   - ts-node/register
+  - ts-node/esm
   - source-map-support/register

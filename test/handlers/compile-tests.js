@@ -25,8 +25,8 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 
-import {CompileHandler, SetTestMode} from '../../lib/handlers/compile';
-import {chai, makeCompilationEnvironment} from '../utils';
+import {CompileHandler, SetTestMode} from '../../lib/handlers/compile.js';
+import {chai, makeCompilationEnvironment} from '../utils.js';
 
 SetTestMode();
 

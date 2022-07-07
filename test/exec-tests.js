@@ -24,12 +24,14 @@
 
 import path from 'path';
 
-import * as exec from '../lib/exec';
-import * as props from '../lib/properties';
+import {Exec} from '../lib/exec.js';
+import * as props from '../lib/properties.js';
 
-import {chai} from './utils';
+import {chai} from './utils.js';
 
 const expect = chai.expect;
+
+const exec = new Exec();
 
 function testExecOutput(x) {
     // Work around chai not being able to deepEquals with a function

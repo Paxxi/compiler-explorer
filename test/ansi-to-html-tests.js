@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 // TODO(supergrecko): Re-enable these once TS test infrastructure is up
-import {Filter} from '../static/ansi-to-html';
+import {Filter} from '../static/ansi-to-html.js';
 
 describe('ansi-to-html', () => {
     const filterOpts = {

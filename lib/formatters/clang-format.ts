@@ -23,10 +23,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {UnprocessedExecResult} from '../../types/execution/execution.interfaces.js';
-import * as exec from '../exec.js';
 
-import {BaseFormatter} from './base.js';
 import {FormatOptions} from './base.interfaces.js';
+import {BaseFormatter} from './base.js';
 
 export class ClangFormatFormatter extends BaseFormatter {
     static get key() {
@@ -36,6 +35,6 @@ export class ClangFormatFormatter extends BaseFormatter {
     override async format(source: string, options: FormatOptions): Promise<UnprocessedExecResult> {
         const tabText = options.useSpaces ? 'Never' : 'AlignWithSpaces';
         const arg = `{BasedOnStyle: ${options.baseStyle}, IndentWidth: ${options.tabWidth}, UseTab: ${tabText}}`;
-        return await exec.execute(this.formatterInfo.exe, [`--style=${arg}`], {input: source});
+        return await this.executor.execute(this.formatterInfo.exe, [`--style=${arg}`], {input: source});
     }
 }

@@ -24,10 +24,10 @@
 
 import child_process from 'child_process';
 
-import {WineVcCompiler} from '../lib/compilers/wine-vc';
-import {WslVcCompiler} from '../lib/compilers/wsl-vc';
+import {WineVcCompiler} from '../lib/compilers/wine-vc.js';
+import {WslVcCompiler} from '../lib/compilers/wsl-vc.js';
 
-import {makeCompilationEnvironment} from './utils';
+import {makeCompilationEnvironment} from './utils.js';
 
 const languages = {
     'c++': {id: 'c++'},

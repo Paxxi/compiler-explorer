@@ -28,7 +28,8 @@
 // Converted to typescript by MarkusJx
 
 import _ from 'underscore';
-import {AnsiToHtmlOptions, ColorCodes} from './ansi-to-html.interfaces';
+// eslint-disable-next-line import/no-unresolved
+import {AnsiToHtmlOptions, ColorCodes} from './ansi-to-html.interfaces.js';
 
 const defaults: AnsiToHtmlOptions = {
     fg: '#FFF',

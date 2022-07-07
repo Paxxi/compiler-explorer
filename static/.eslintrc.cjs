@@ -57,6 +57,13 @@ module.exports = {
                 tsconfigRootDir: __dirname,
                 project: './tsconfig.json',
             },
+            settings: {
+                'import/resolver': {
+                    node: {
+                        extensions: ['.mjs', '.js', '.json', '.ts'],
+                    },
+                },
+            },
             rules: {
                 '@typescript-eslint/no-empty-function': 'off',
                 '@typescript-eslint/no-unused-vars': 'off',
@@ -64,6 +71,15 @@ module.exports = {
                 '@typescript-eslint/no-explicit-any': 'off', // Too much js code still exists
                 '@typescript-eslint/ban-ts-comment': 'off', // We need some @ts-ignore at some points
                 '@typescript-eslint/no-unnecessary-condition': 'error',
+                'import/extensions': [
+                    'off',
+                    'ignorePackages',
+                    {
+                        js: 'always',
+                        mjs: 'never',
+                        ts: 'always',
+                    },
+                ],
             },
         },
     ],

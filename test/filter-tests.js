@@ -23,16 +23,17 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import path from 'path';
+import {fileURLToPath} from 'url';
 
 import approvals from 'approvals';
 
-import {AsmParser} from '../lib/parsers/asm-parser';
-import {SassAsmParser} from '../lib/parsers/asm-parser-sass';
-import {VcAsmParser} from '../lib/parsers/asm-parser-vc';
+import {SassAsmParser} from '../lib/parsers/asm-parser-sass.js';
+import {VcAsmParser} from '../lib/parsers/asm-parser-vc.js';
+import {AsmParser} from '../lib/parsers/asm-parser.js';
 
-import {fs, resolvePathFromTestRoot} from './utils';
+import {fs, resolvePathFromTestRoot} from './utils.js';
 
-approvals.mocha();
+approvals.mocha(path.dirname(fileURLToPath(import.meta.url)));
 
 function processAsm(filename, filters) {
     const file = fs.readFileSync(filename, 'utf-8');

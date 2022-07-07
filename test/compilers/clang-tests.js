@@ -22,8 +22,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {ClangCompiler} from '../../lib/compilers';
-import {chai, makeCompilationEnvironment} from '../utils';
+import {ClangCompiler} from '../../lib/compilers/index.js';
+import {chai, makeCompilationEnvironment} from '../utils.js';
 
 const expect = chai.expect;
 

@@ -42,16 +42,16 @@ import {Language} from '../types/languages.interfaces.js';
 import {Library, LibraryVersion, SelectedLibraryVersion} from '../types/libraries/libraries.interfaces.js';
 import {ResultLine} from '../types/resultline/resultline.interfaces.js';
 
-import {BuildEnvSetupBase, getBuildEnvTypeByKey} from './buildenvsetup/index.js';
 import {BuildEnvDownloadInfo} from './buildenvsetup/buildenv.interfaces.js';
+import {BuildEnvSetupBase, getBuildEnvTypeByKey} from './buildenvsetup/index.js';
 import * as cfg from './cfg.js';
 import {CompilerArguments} from './compiler-arguments.js';
 import {ClangParser, GCCParser} from './compilers/argument-parsers.js';
 import {getDemanglerTypeByKey} from './demangler/index.js';
 import {LLVMIRDemangler} from './demangler/llvm.js';
-import * as exec from './exec.js';
-import {getExternalParserByKey} from './external-parsers/index.js';
+import {Exec} from './exec.js';
 import {ExternalParserBase} from './external-parsers/base.js';
+import {getExternalParserByKey} from './external-parsers/index.js';
 import {InstructionSets} from './instructionsets.js';
 import {languages} from './languages.js';
 import {LlvmAstParser} from './llvm-ast.js';
@@ -60,8 +60,8 @@ import * as compilerOptInfo from './llvm-opt-transformer.js';
 import {logger} from './logger.js';
 import {getObjdumperTypeByKey} from './objdumper/index.js';
 import {Packager} from './packager.js';
-import {AsmParser} from './parsers/asm-parser.js';
 import {IAsmParser} from './parsers/asm-parser.interfaces.js';
+import {AsmParser} from './parsers/asm-parser.js';
 import {LlvmPassDumpParser} from './parsers/llvm-pass-dump-parser.js';
 import {getToolchainPath} from './toolchain-utils.js';
 import * as utils from './utils.js';
@@ -93,6 +93,7 @@ export class BaseCompiler {
     protected externalparser: null | ExternalParserBase;
     protected supportedLibraries?: Record<string, Library>;
     protected packager: Packager;
+    protected executor: Exec;
     private static objdumpAndParseCounter = new PromClient.Counter({
         name: 'ce_objdumpandparsetime_total',
         help: 'Time spent on objdump and parsing of objdumps',
@@ -179,6 +180,7 @@ export class BaseCompiler {
         }
 
         this.packager = new Packager();
+        this.executor = new Exec();
     }
 
     copyAndFilterLibraries(allLibraries, filter) {
@@ -283,7 +285,7 @@ export class BaseCompiler {
 
     async exec(filepath: string, args: string[], execOptions: ExecutionOptions) {
         // Here only so can be overridden by compiler implementations.
-        return exec.execute(filepath, args, execOptions);
+        return this.executor.execute(filepath, args, execOptions);
     }
 
     protected getCompilerCacheKey(compiler, args, options) {
@@ -303,7 +305,7 @@ export class BaseCompiler {
         const key = this.getCompilerCacheKey(compiler, args, options);
         let result = await this.env.compilerCacheGet(key);
         if (!result) {
-            result = await this.env.enqueue(async () => exec.execute(compiler, args, options));
+            result = await this.env.enqueue(async () => this.executor.execute(compiler, args, options));
             if (result.okToCache) {
                 this.env
                     .compilerCachePut(key, result)
@@ -424,7 +426,7 @@ export class BaseCompiler {
         // We might want to save this in the compilation environment once execution is made available
         const timeoutMs = this.env.ceProps('binaryExecTimeoutMs', 2000);
         try {
-            const execResult = await exec.sandbox(executable, executeParameters.args, {
+            const execResult = await this.executor.sandbox(executable, executeParameters.args, {
                 maxOutput: maxSize,
                 timeoutMs: timeoutMs,
                 ldPath: _.union(this.compiler.ldPath, executeParameters.ldPath).join(':'),

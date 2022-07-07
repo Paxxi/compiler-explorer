@@ -23,15 +23,17 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {UnprocessedExecResult} from '../../types/execution/execution.interfaces.js';
-import * as exec from '../exec.js';
+import {Exec} from '../exec.js';
 
 import {FormatOptions, FormatterInfo} from './base.interfaces.js';
 
 export abstract class BaseFormatter {
     public formatterInfo: FormatterInfo;
+    protected readonly executor: Exec;
 
     public constructor(formatterInfo: FormatterInfo) {
         this.formatterInfo = formatterInfo;
+        this.executor = new Exec();
     }
 
     /**
@@ -42,7 +44,7 @@ export abstract class BaseFormatter {
      */
     async format(source: string, options: FormatOptions): Promise<UnprocessedExecResult> {
         const args = [`--style=${options.baseStyle}`];
-        return await exec.execute(this.formatterInfo.exe, args, {input: source});
+        return await this.executor.execute(this.formatterInfo.exe, args, {input: source});
     }
 
     /**

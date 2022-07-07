@@ -79,6 +79,10 @@ rules:
   sonarjs/prefer-object-literal: error
   sonarjs/prefer-single-boolean-return: error
   unicorn/filename-case: error
+  import/extensions: off
+  import/no-unresolved: off
+  node/no-missing-import: off
+  node/no-unpublished-require: off
 parserOptions:
   ecmaVersion: 6
 globals:

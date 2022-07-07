@@ -27,7 +27,6 @@ import path from 'path';
 import fs from 'fs-extra';
 
 import {BaseCompiler} from '../base-compiler.js';
-import * as exec from '../exec.js';
 import {logger} from '../logger.js';
 import {TurboCAsmParser} from '../parsers/asm-parser-turboc.js';
 
@@ -142,7 +141,7 @@ export class DosboxCompiler extends BaseCompiler {
         const tempDir = execOptions.customCwd;
         const fullArgs = this.getDosboxArgs(tempDir, args);
 
-        const result = await exec.executeDirect(this.dosbox, fullArgs, execOptions);
+        const result = await this.executor.executeDirect(this.dosbox, fullArgs, execOptions);
 
         const stdoutFilename = path.join(tempDir, 'STDOUT.TXT');
         const stdout = await fs.readFile(stdoutFilename);

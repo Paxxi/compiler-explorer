@@ -25,10 +25,10 @@
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import {logger} from '../lib/logger';
-import * as utils from '../lib/utils';
+import {logger} from '../lib/logger.js';
+import * as utils from '../lib/utils.js';
 
-import {fs} from './utils';
+import {fs} from './utils.js';
 
 describe('Splits lines', () => {
     it('handles empty input', () => {

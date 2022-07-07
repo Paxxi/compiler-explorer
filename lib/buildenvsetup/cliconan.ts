@@ -27,7 +27,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import _ from 'underscore';
 
-import * as exec from '../exec.js';
+import {Exec} from '../exec.js';
 import {logger} from '../logger.js';
 
 import {BuildEnvSetupBase} from './base.js';
@@ -37,6 +37,7 @@ export class BuildEnvSetupCliConan extends BuildEnvSetupBase {
     private exe: any;
     private remote: any;
     private onlyonstaticliblink: any;
+    private executor: Exec;
 
     static get key() {
         return 'cliconan';
@@ -48,6 +49,7 @@ export class BuildEnvSetupCliConan extends BuildEnvSetupBase {
         this.exe = compilerInfo.buildenvsetup.props('exe', 'conan');
         this.remote = compilerInfo.buildenvsetup.props('remote', false);
         this.onlyonstaticliblink = compilerInfo.buildenvsetup.props('onlyonstaticliblink', true);
+        this.executor = new Exec();
     }
 
     override async setup(key, dirPath, libraryDetails): Promise<BuildEnvDownloadInfo[]> {
@@ -107,7 +109,7 @@ export class BuildEnvSetupCliConan extends BuildEnvSetupBase {
 
         logger.info('Conan install: ', args);
 
-        const result = await exec.execute(this.exe, args, {customCwd: dirPath});
+        const result = await this.executor.execute(this.exe, args, {customCwd: dirPath});
         const info: BuildEnvDownloadInfo = {
             step: 'Conan install',
             packageUrl: args.join(' '),

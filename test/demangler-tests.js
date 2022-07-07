@@ -22,19 +22,20 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {CppDemangler, Win32Demangler} from '../lib/demangler';
-import {PrefixTree} from '../lib/demangler/prefix-tree';
-import * as exec from '../lib/exec';
-import {SymbolStore} from '../lib/symbol-store';
-import * as utils from '../lib/utils';
+import {CppDemangler, Win32Demangler} from '../lib/demangler/index.js';
+import {PrefixTree} from '../lib/demangler/prefix-tree.js';
+import {Exec} from '../lib/exec.js';
+import {SymbolStore} from '../lib/symbol-store.js';
+import * as utils from '../lib/utils.js';
 
-import {chai, fs, path, resolvePathFromTestRoot} from './utils';
+import {chai, fs, path, resolvePathFromTestRoot} from './utils.js';
 
 const cppfiltpath = 'c++filt';
 
 class DummyCompiler {
+    executor = new Exec();
     exec(command, args, options) {
-        return exec.execute(command, args, options);
+        return this.executor.execute(command, args, options);
     }
 }
 

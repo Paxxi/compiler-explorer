@@ -1,4 +1,4 @@
-import {ResultLineTag} from '../resultline/resultline.interfaces';
+import {ResultLineTag} from '../resultline/resultline.interfaces.js';
 
 export type ParsedAsmResult = {
     asm: ResultLineTag[];

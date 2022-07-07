@@ -24,10 +24,10 @@
 
 import * as fs from 'fs';
 
-import {BaseCompiler} from '../lib/base-compiler';
-import * as properties from '../lib/properties';
+import {BaseCompiler} from '../lib/base-compiler.js';
+import * as properties from '../lib/properties.js';
 
-import * as filterTests from './pp-output-cases/filter-tests';
+import * as filterTests from './pp-output-cases/filter-tests.js';
 
 //const makeFakeCompilerInfo = (id: string, lang: string, group: string, semver: string, isSemver: boolean) => {
 const makeFakeCompilerInfo = (id, lang, group, semver, isSemver) => {

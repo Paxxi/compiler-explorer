@@ -22,9 +22,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import * as properties from '../lib/properties';
+import * as properties from '../lib/properties.js';
 
-import {should} from './utils';
+import {should} from './utils.js';
 
 const languages = {
     a: {id: 'a'},

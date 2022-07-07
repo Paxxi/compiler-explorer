@@ -25,14 +25,14 @@
 import AWS from 'aws-sdk-mock';
 import temp from 'temp';
 
-import {createCacheFromConfig} from '../lib/cache/from-config';
-import {InMemoryCache} from '../lib/cache/in-memory';
-import {MultiCache} from '../lib/cache/multi';
-import {NullCache} from '../lib/cache/null';
-import {OnDiskCache} from '../lib/cache/on-disk';
-import {S3Cache} from '../lib/cache/s3';
+import {createCacheFromConfig} from '../lib/cache/from-config.js';
+import {InMemoryCache} from '../lib/cache/in-memory.js';
+import {MultiCache} from '../lib/cache/multi.js';
+import {NullCache} from '../lib/cache/null.js';
+import {OnDiskCache} from '../lib/cache/on-disk.js';
+import {S3Cache} from '../lib/cache/s3.js';
 
-import {fs, path} from './utils';
+import {fs, path} from './utils.js';
 
 function newTempDir() {
     temp.track(true);

@@ -22,10 +22,10 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {JavaCompiler} from '../lib/compilers';
-import * as utils from '../lib/utils';
+import {JavaCompiler} from '../lib/compilers/index.js';
+import * as utils from '../lib/utils.js';
 
-import {fs, makeCompilationEnvironment} from './utils';
+import {fs, makeCompilationEnvironment} from './utils.js';
 
 const languages = {
     java: {id: 'java'},

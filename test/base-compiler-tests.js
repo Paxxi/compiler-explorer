@@ -24,12 +24,12 @@
 
 import {match, mock, restore, stub} from 'sinon';
 
-import {BaseCompiler} from '../lib/base-compiler';
-import {BuildEnvSetupBase} from '../lib/buildenvsetup';
-import {Win32Compiler} from '../lib/compilers/win32';
-import * as exec from '../lib/exec';
+import {BaseCompiler} from '../lib/base-compiler.js';
+import {BuildEnvSetupBase} from '../lib/buildenvsetup/index.js';
+import {Win32Compiler} from '../lib/compilers/win32.js';
+import {Exec} from '../lib/exec.js';
 
-import {fs, makeCompilationEnvironment, path, should} from './utils';
+import {fs, makeCompilationEnvironment, path, should} from './utils.js';
 
 const languages = {
     'c++': {id: 'c++'},
@@ -355,8 +355,10 @@ describe('Compiler execution', function () {
     });
 
     it('should execute', async () => {
+        const exec = new Exec();
         const execMock = mock(exec);
         const execStub = stub(compiler, 'exec');
+        compiler.executor = exec;
         stubOutCallToExec(
             execStub,
             compiler,
@@ -401,8 +403,10 @@ describe('Compiler execution', function () {
     it('should execute with an execution wrapper', async () => {
         const executionWrapper = '/some/wrapper/script.sh';
         compiler.compiler.executionWrapper = executionWrapper;
+        const exec = new Exec();
         const execMock = mock(exec);
         const execStub = stub(compiler, 'exec');
+        compiler.executor = exec;
         stubOutCallToExec(
             execStub,
             compiler,
@@ -437,8 +441,10 @@ describe('Compiler execution', function () {
     });
 
     it('should not execute where not supported', async () => {
+        const exec = new Exec();
         const execMock = mock(exec);
         const execStub = stub(compilerNoExec, 'exec');
+        compilerNoExec.executor = exec;
         stubOutCallToExec(
             execStub,
             compilerNoExec,

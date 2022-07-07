@@ -22,9 +22,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-import {RouteAPI} from '../lib/handlers/route-api';
+import {RouteAPI} from '../lib/handlers/route-api.js';
 
-import {fs} from './utils';
+import {fs} from './utils.js';
 
 describe('Basic unfurls', () => {
     const router = null;
